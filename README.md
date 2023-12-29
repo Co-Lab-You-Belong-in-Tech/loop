@@ -1,1 +1,1 @@
-# loop
+# A daily management optimization app for daily tasks, such as laundry management, grocery shopping, establishing routines, and daily planning, to alleviate stress, save time, and enhance overall well-being for individuals dealing with the challenges of decision fatigue, procrastination, and lack of motivation
