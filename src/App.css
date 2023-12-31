@@ -20,18 +20,25 @@ body {
 }
 
 body {
-  background-color: #63bd9a;
- 
+  background-color:linear-gradient(90deg, #00CECB, #FFED66);
+
 }
 
-nav {
+.nav {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   min-height: 90px;
+  margin-top: 50px;
 }
-.navbar-menu-container {
-  display: none;
+.nav-started {
+  padding-top: 70px;
+}
+
+.nav-started button{
+  background-color: rgba(0, 0, 255, 0.633);
+  color: white;
 }
 .navbar-links-container a {
   margin-right: 3rem;
