@@ -1,4 +1,5 @@
 import { useState } from "react";
+import HabitContainer from "./HabitContainer";
 
 function TaskContainer() {
 
@@ -18,7 +19,8 @@ function TaskContainer() {
 
     return (
         <div className="taskContainer">
-
+            <HabitContainer />
+            <p>Add a task, event, or to-do item by tapping “+” down below</p>
             <form onSubmit={handleSubmit}>
                 <div className="eventDetail">
                     <label htmlFor="event">Event</label>
