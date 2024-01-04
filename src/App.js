@@ -1,5 +1,5 @@
 import './App.css';
-import Dashboard from './components/Dashboard';
+import Home from './components/Home'
 
 function App() {
     return (
@@ -8,7 +8,7 @@ function App() {
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
             </head>
 
-            <Dashboard />
+            <Home />
         </>
     );
 }

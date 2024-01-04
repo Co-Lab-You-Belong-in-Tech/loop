@@ -1,13 +1,13 @@
 import Header from "./Header";
 import TaskContainer from "./TaskContainer";
 
-function Dashboard() {
+function Home() {
     return (
-        <div className="dashboard">
+        <div className="home">
             <Header />
             <TaskContainer />
         </div>
     );
 }
 
-export default Dashboard;
+export default Home;
