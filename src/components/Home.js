@@ -1,67 +1,70 @@
 import * as React from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from "./Header";
 import TaskContainer from "./TaskContainer";
-import Box from '@mui/joy/Box';
+import BottomMenu from './BottomMenu';
 import IconButton from '@mui/joy/IconButton';
 import Drawer from '@mui/joy/Drawer';
-import Input from '@mui/joy/Input';
 import List from '@mui/joy/List';
 import ListItemButton from '@mui/joy/ListItemButton';
-import Typography from '@mui/joy/Typography';
-import ModalClose from '@mui/joy/ModalClose';
-import Menu from '@mui/icons-material/Menu';
-import Add from '@mui/icons-material/Add';
-import { useState } from 'react'
+import MenuIcon from '@mui/icons-material/Menu';
+import AddIcon from '@mui/icons-material/Add';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 function Home() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [bottomMenuOpen, setBottomMenuOpen] = React.useState(false);
+
+    const handleMenuButtonClick = () => {
+        setOpen(!open);
+    };
+
+    const handleCloseMenuButtonClick = () => {
+        setOpen(false);
+    };
+
+    const handleAddButtonClick = () => {
+        setBottomMenuOpen(true);
+    };
+
+    const handleCloseBottomMenu = () => {
+        setBottomMenuOpen(false);
+    };
 
     return (
         <div className="home">
-            <IconButton color="neutral" onClick={() => setOpen(true)}>
-                <Menu />
+            <IconButton color="neutral" onClick={handleMenuButtonClick}>
+                <MenuIcon />
             </IconButton>
-            <Drawer open={open} onClose={() => setOpen(false)}>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 0.3,
-                        ml: 'auto',
-                        mt: 1,
-                        mr: 2,
-                    }}
-                >
-                    <Typography
-                        component="label"
-                        htmlFor="close-icon"
-                        fontSize="sm"
-                        fontWeight="lg"
-                        sx={{ cursor: 'pointer' }}
-                    >
-                        Close
-                    </Typography>
-                    <ModalClose id="close-icon" sx={{ position: 'initial' }} />
-                </Box>
-                <List
-                    size="lg"
-                    component="nav"
-                    sx={{
-                        flex: 'none',
-                        fontSize: 'xl',
-                        '& > div': { justifyContent: 'center' },
-                    }}
-                >
-                    <ListItemButton>Events</ListItemButton>
-                    <ListItemButton>Tasks</ListItemButton>
-                    <ListItemButton>To-Do</ListItemButton>
-                    <ListItemButton>Habit Tracker</ListItemButton>
+            <Drawer open={open} onClose={handleCloseMenuButtonClick}>
+                <List size="lg" component="nav" sx={{ flex: 'none', fontSize: 'xl', '& > div': { justifyContent: 'center' } }}>
+                    <ListItemButton>
+                        <Link to="/">Events</Link>
+                    </ListItemButton>
+                    <ListItemButton>
+                        <Link to="/">Tasks</Link>
+                    </ListItemButton>
+                    <ListItemButton>
+                        <Link to="/">To-Do</Link>
+                    </ListItemButton>
+                    <ListItemButton>
+                        <Link to="/">Habit Tracker</Link>
+                    </ListItemButton>
                 </List>
             </Drawer>
+            <SwipeableDrawer
+                anchor="bottom"
+                open={bottomMenuOpen}
+                onClose={() => setBottomMenuOpen(false)}
+                disableSwipeToOpen={false}
+            >
+                <BottomMenu isOpen={bottomMenuOpen} onClose={handleCloseBottomMenu} />
+            </SwipeableDrawer>
             <Header />
             <TaskContainer />
-            <IconButton variant="soft" aria-label="Add Habit or Task">
-                <Add />
+            <IconButton variant="soft" aria-label="Add Habit or Task" onClick={handleAddButtonClick}>
+                <AddIcon />
             </IconButton>
         </div>
     );
