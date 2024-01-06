@@ -86,22 +86,22 @@ function BottomMenu({ isOpen, onClose }) {
                         }}
                     >
                         <ListItemButton>
-                            <Link to="/"><span class="material-icons">
+                            <Link to="/"><span className="material-icons">
                                 calendar_today
                             </span>Add Event</Link>
                         </ListItemButton>
                         <ListItemButton>
-                            <Link to="/"><span class="material-icons">
+                            <Link to="/"><span className="material-icons">
                                 content_paste
                             </span>Add Task</Link>
                         </ListItemButton>
                         <ListItemButton>
-                            <Link to="/"><span class="material-icons">
+                            <Link to="/"><span className="material-icons">
                                 favorite
                             </span>Add Habit</Link>
                         </ListItemButton>
                         <ListItemButton>
-                            <Link to="/"><span class="material-icons">
+                            <Link to="/"><span className="material-icons">
                                 check_circle_outline
                             </span>Add To-Do</Link>
                         </ListItemButton>

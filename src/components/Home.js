@@ -40,22 +40,22 @@ function Home() {
             <Drawer open={open} onClose={handleCloseMenuButtonClick}>
                 <List size="lg" component="nav" sx={{ flex: 'none', fontSize: 'xl', '& > div': { justifyContent: 'center' } }}>
                     <ListItemButton>
-                        <Link to="/"><span class="material-icons">
+                        <Link to="/"><span className="material-icons">
                             calendar_today
                         </span>Events</Link>
                     </ListItemButton>
                     <ListItemButton>
-                        <Link to="/"><span class="material-icons">
+                        <Link to="/"><span className="material-icons">
                             content_paste
                         </span>Tasks</Link>
                     </ListItemButton>
                     <ListItemButton>
-                        <Link to="/"><span class="material-icons">
+                        <Link to="/"><span className="material-icons">
                             check_circle_outline
                         </span>To-Do</Link>
                     </ListItemButton>
                     <ListItemButton>
-                        <Link to="/"><span class="material-icons">
+                        <Link to="/"><span className="material-icons">
                             favorite
                         </span>Habit Tracker</Link>
                     </ListItemButton>
