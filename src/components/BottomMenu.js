@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Global } from '@emotion/react';
 import { styled } from '@mui/material/styles';
@@ -9,13 +9,13 @@ import ListItemButton from '@mui/joy/ListItemButton';
 import Box from '@mui/material/Box';
 import List from '@mui/joy/List';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import AddTaskMenu from './AddTaskMenu';  // Import the AddTaskMenu component
 
 const drawerBleeding = 56;
 
 const Root = styled('div')(({ theme }) => ({
     height: '100%',
-    backgroundColor:
-        theme.palette.mode === 'light' ? grey[100] : theme.palette.background.default,
+    backgroundColor: theme.palette.mode === 'light' ? grey[100] : theme.palette.background.default,
 }));
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -32,7 +32,15 @@ const Puller = styled(Box)(({ theme }) => ({
     left: 'calc(50% - 15px)',
 }));
 
-function BottomMenu({ isOpen, onClose }) {
+function BottomMenu({ isOpen, onClose, onTasksLinkClick }) {
+    const [tasksLinkClicked, setTasksLinkClicked] = useState(false);
+
+    const handleTasksLinkClick = () => {
+        setTasksLinkClicked(true);
+        onClose();
+        onTasksLinkClick();  // Call the function to open AddTaskMenu
+    };
+
     return (
         <Root>
             <CssBaseline />
@@ -86,28 +94,30 @@ function BottomMenu({ isOpen, onClose }) {
                         }}
                     >
                         <ListItemButton>
-                            <Link to="/"><span className="material-icons">
-                                calendar_today
-                            </span>Add Event</Link>
+                            <Link to="/" onClick={() => onClose()}>
+                                <span className="material-icons">calendar_today</span>Add Event
+                            </Link>
                         </ListItemButton>
                         <ListItemButton>
-                            <Link to="/"><span className="material-icons">
-                                content_paste
-                            </span>Add Task</Link>
+                            <Link onClick={handleTasksLinkClick}>
+                                <span className="material-icons">content_paste</span>Add Task
+                            </Link>
                         </ListItemButton>
                         <ListItemButton>
-                            <Link to="/"><span className="material-icons">
-                                favorite
-                            </span>Add Habit</Link>
+                            <Link to="/" onClick={() => onClose()}>
+                                <span className="material-icons">favorite</span>Add Habit
+                            </Link>
                         </ListItemButton>
                         <ListItemButton>
-                            <Link to="/"><span className="material-icons">
-                                check_circle_outline
-                            </span>Add To-Do</Link>
+                            <Link to="/" onClick={() => onClose()}>
+                                <span className="material-icons">check_circle_outline</span>Add To-Do
+                            </Link>
                         </ListItemButton>
                     </List>
                 </StyledBox>
             </SwipeableDrawer>
+
+            {tasksLinkClicked && <AddTaskMenu onClose={() => setTasksLinkClicked(false)} />}
         </Root>
     );
 }
