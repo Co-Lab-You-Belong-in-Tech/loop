@@ -1,110 +1,103 @@
-import FormControl from "@mui/joy/FormControl";
-import FormLabel from "@mui/joy/FormLabel";
-import Input from "@mui/joy/Input";
-import Select, { selectClasses } from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
-import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+import { useState } from 'react';
 
 function TaskCreator() {
+    const [taskData, setTaskData] = useState({
+        taskTitle: '',
+        estimatedTime: '',
+        categoryColor: '',
+        categoryType: '',
+        priority: '',
+    });
+
+    const handleInputChange = (fieldName, event) => {
+        const value = event.target.value;
+
+        setTaskData((prevTaskData) => ({
+            ...prevTaskData,
+            [fieldName]: value,
+        }));
+
+        console.log('Field Name:', fieldName);
+        console.log('Value:', value);
+    };
+
+    const handleAddTask = () => {
+        // Do something with the taskData, such as saving it to state or making an API call.
+        console.log('Task Data:', taskData);
+    };
+
     return (
         <div className="taskCreator">
+            <button onClick={handleAddTask}>Close</button>
             <h2 className="creatorTitle">Add Task</h2>
-            <FormControl>
-                <FormLabel>Task Title</FormLabel>
-                <Input placeholder="Task title here..." />
+            <div>
+                <label>Task Title</label>
+                <input
+                    type="text"
+                    placeholder="Task title here..."
+                    onChange={(e) => handleInputChange('taskTitle', e)}
+                />
+            </div>
 
-                {/* Estimated Time */}
-                <FormLabel>Estimated Time</FormLabel>
-                <Select
-                    placeholder="Select time…"
-                    indicator={<KeyboardArrowDown />}
-                    sx={{
-                        width: 240,
-                        [`& .${selectClasses.indicator}`]: {
-                            transition: '0.2s',
-                            [`&.${selectClasses.expanded}`]: {
-                                transform: 'rotate(-180deg)',
-                            },
-                        },
-                    }}
+            {/* Estimated Time */}
+            <div>
+                <label>Estimated Time</label>
+                <select
+                    value={taskData.estimatedTime}
+                    onChange={(e) => handleInputChange('estimatedTime', e)}
                 >
-                    <Option value="5">5 minutes</Option>
-                    <Option value="15">15 minutes</Option>
-                    <Option value="30">30 minutes</Option>
-                    <Option value="45">45 minutes</Option>
-                    <Option value="60">1 hour</Option>
-                </Select>
+                    <option value="5">5 minutes</option>
+                    <option value="15">15 minutes</option>
+                    <option value="30">30 minutes</option>
+                    <option value="45">45 minutes</option>
+                    <option value="60">1 hour</option>
+                </select>
+            </div>
 
-                {/* Category Color */}
-                <FormLabel>Category Color</FormLabel>
-                <Select
-                    placeholder="Category Color"
-                    indicator={<KeyboardArrowDown />}
-                    sx={{
-                        width: 240,
-                        [`& .${selectClasses.indicator}`]: {
-                            transition: '0.2s',
-                            [`&.${selectClasses.expanded}`]: {
-                                transform: 'rotate(-180deg)',
-                            },
-                        },
-                    }}
+            {/* Category Color */}
+            <div>
+                <label>Category Color</label>
+                <select
+                    value={taskData.categoryColor}
+                    onChange={(e) => handleInputChange('categoryColor', e)}
                 >
-                    <Option value="blue">
-                        <i class="fa-solid fa-circle blueCircle"></i>Blue</Option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                    <option value="orange">Orange</option>
+                    <option value="purple">Purple</option>
+                    <option value="red">Red</option>
+                </select>
+            </div>
 
-                    <Option value="green">
-                        <i class="fa-solid fa-circle greenCircle"></i> Green</Option>
-
-                    <Option value="orange"><i class="fa-solid fa-circle orangeCircle"></i>Orange</Option>
-
-                    <Option value="purple"><i class="fa-solid fa-circle purpleCircle"></i>Purple</Option>
-
-                    <Option value="red"><i class="fa-solid fa-circle redCircle"></i>Red</Option>
-                </Select>
-
-                {/* Category Type */}
-                <FormLabel>Category Type</FormLabel>
-                <Select
-                    placeholder="Select Category"
-                    indicator={<KeyboardArrowDown />}
-                    sx={{
-                        width: 240,
-                        [`& .${selectClasses.indicator}`]: {
-                            transition: '0.2s',
-                            [`&.${selectClasses.expanded}`]: {
-                                transform: 'rotate(-180deg)',
-                            },
-                        },
-                    }}
+            {/* Category Type */}
+            <div>
+                <label>Category Type</label>
+                <select
+                    value={taskData.categoryType}
+                    onChange={(e) => handleInputChange('categoryType', e)}
                 >
-                    <Option value="health">Health</Option>
-                    <Option value="household">Household</Option>
-                    <Option value="childcare">Childcare</Option>
-                    <Option value="errands">Errands</Option>
-                    <Option value="hobby">Hobby</Option>
-                </Select>
+                    <option value="health">Health</option>
+                    <option value="household">Household</option>
+                    <option value="childcare">Childcare</option>
+                    <option value="errands">Errands</option>
+                    <option value="hobby">Hobby</option>
+                </select>
+            </div>
 
-                {/* Priority */}
-                <FormLabel>Priority</FormLabel>
-                <Select
-                    placeholder="Select priority…"
-                    indicator={<KeyboardArrowDown />}
-                    sx={{
-                        width: 240,
-                        [`& .${selectClasses.indicator}`]: {
-                            transition: '0.2s',
-                            [`&.${selectClasses.expanded}`]: {
-                                transform: 'rotate(-180deg)',
-                            },
-                        },
-                    }}
+            {/* Priority */}
+            <div>
+                <label>Priority</label>
+                <select
+                    value={taskData.priority}
+                    onChange={(e) => handleInputChange('priority', e)}
                 >
-                    <Option value="High"><i class="fa-solid fa-flag redFlag"></i>High</Option>
-                    <Option value="Medium"><i class="fa-solid fa-flag orangeFlag"></i>Medium</Option>
-                    <Option value="Low"><i class="fa-solid fa-flag greenFlag"></i>Low</Option>
-                </Select>
-            </FormControl>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+
+            <button onClick={handleAddTask}>Add Task</button>
         </div>
     );
 }

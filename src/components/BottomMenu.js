@@ -52,9 +52,7 @@ function BottomMenu({ isOpen, onClose, onTasksLinkClick }) {
                     },
                 }}
             />
-            <Box sx={{ textAlign: 'center', pt: 1 }}>
-                <Button onClick={() => onClose()}>Close</Button>
-            </Box>
+
             <SwipeableDrawer
                 anchor="bottom"
                 open={isOpen}

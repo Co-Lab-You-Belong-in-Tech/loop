@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
-import Button from '@mui/material/Button';
 import ListItemButton from '@mui/joy/ListItemButton';
 import Box from '@mui/material/Box';
 import List from '@mui/joy/List';
