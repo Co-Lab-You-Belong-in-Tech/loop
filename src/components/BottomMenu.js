@@ -92,22 +92,22 @@ function BottomMenu({ isOpen, onClose, onTasksLinkClick }) {
                         }}
                     >
                         <ListItemButton>
-                            <Link to="/" onClick={() => onClose()}>
+                            <Link to="/" className="linkComponent" onClick={() => onClose()}>
                                 <span className="material-icons">calendar_today</span>Add Event
                             </Link>
                         </ListItemButton>
                         <ListItemButton>
-                            <Link onClick={handleTasksLinkClick}>
+                            <Link className="linkComponent" onClick={handleTasksLinkClick}>
                                 <span className="material-icons">content_paste</span>Add Task
                             </Link>
                         </ListItemButton>
                         <ListItemButton>
-                            <Link to="/" onClick={() => onClose()}>
+                            <Link to="/" className="linkComponent" onClick={() => onClose()}>
                                 <span className="material-icons">favorite</span>Add Habit
                             </Link>
                         </ListItemButton>
                         <ListItemButton>
-                            <Link to="/" onClick={() => onClose()}>
+                            <Link to="/todocreator" className="linkComponent" onClick={() => onClose()}>
                                 <span className="material-icons">check_circle_outline</span>Add To-Do
                             </Link>
                         </ListItemButton>

@@ -5,6 +5,7 @@ import Welcome from './components/Welcome';
 import NameInput from './components/NameInput';
 import AddTaskMenu from './components/AddTaskMenu';
 import TaskCreator from './components/TaskCreator';
+import ToDoCreator from './components/ToDoCreator';
 
 function App() {
     
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/addtaskmenu" element={<AddTaskMenu />} />
                 <Route path="/name" element ={<NameInput />} />
                 <Route path='/taskcreator' element ={<TaskCreator />} />
+                <Route path="/todocreator" element={<ToDoCreator />} />
             </Routes>
         </>
     );

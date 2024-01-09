@@ -6,7 +6,7 @@ function Welcome() {
     return (
         <div>
             <h1>Welcome to Loop</h1>
-            <Link to={ "/name" }><Button size="lg">Get Started</Button></Link>
+            <Link className="linkComponent" to={ "/name" }><Button size="lg">Get Started</Button></Link>
         </div>
     );
 }

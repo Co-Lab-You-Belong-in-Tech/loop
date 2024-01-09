@@ -72,7 +72,7 @@ function AddTaskMenu({ isOpen, onClose }) {
                             <Puller />
                             <List size="lg" component="nav">
                                 <ListItemButton>
-                                    <Link to="/taskcreator " onClick={() => onClose()}>
+                                    <Link to="/taskcreator" className="linkComponent" onClick={() => onClose()}>
                                         <h3><span class="material-icons">add</span>Create Task</h3>
                                     </Link>
                                 </ListItemButton>

@@ -308,6 +308,34 @@ body {
     font-size: 16px;
 }
 
+.linkComponent {
+    text-decoration: none;
+}
+
+.blueCircle {
+    color: blue;
+}
+
+.greenCircle,
+.greenFlag {
+    color: green
+}
+
+.orangeCircle,
+.orangeFlag {
+    color: orange
+}
+
+.purpleCircle {
+    color: purple
+}
+
+.redCircle,
+.redFlag {
+    color: red;
+}
+
+
 @media (max-width: 575px) {
     /* styles for extra small screens */
 }
@@ -322,27 +350,4 @@ body {
 
 @media (max-width: 1199px) {
 
-    /* styles for large screens */
-            .blueCircle {
-                    color: blue;
-                }
-            
-                .greenCircle,
-                .greenFlag {
-                    color: green
-                }
-            
-                .orangeCircle,
-                .orangeFlag {
-                    color: orange
-                }
-            
-                .purpleCircle {
-                    color: purple
-                }
-            
-                .redCircle,
-                .redFlag {
-                    color: red;
-                }
 }

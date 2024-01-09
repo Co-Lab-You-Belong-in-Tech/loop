@@ -51,22 +51,22 @@ function Home() {
             <Drawer open={menuOpen} onClose={handleCloseMenuButtonClick}>
                 <List size="lg" component="nav" sx={{ flex: 'none', fontSize: 'xl', '& > div': { justifyContent: 'center' } }}>
                     <ListItemButton>
-                        <Link to="/"><span className="material-icons">
+                        <Link to="/" className="linkComponent"><span className="material-icons">
                             calendar_today
                         </span>Events</Link>
                     </ListItemButton>
                     <ListItemButton>
-                        <Link to="/"><span className="material-icons">
+                        <Link to="/" className="linkComponent"><span className="material-icons">
                             content_paste
                         </span>Tasks</Link>
                     </ListItemButton>
                     <ListItemButton>
-                        <Link to="/"><span className="material-icons">
+                        <Link to="/" className="linkComponent"><span className="material-icons">
                             check_circle_outline
                         </span>To-Do</Link>
                     </ListItemButton>
                     <ListItemButton>
-                        <Link to="/"><span className="material-icons">
+                        <Link to="/" className="linkComponent"><span className="material-icons">
                             favorite
                         </span>Habit Tracker</Link>
                     </ListItemButton>
@@ -96,6 +96,27 @@ function Home() {
             >
                 <AddTaskMenu isOpen={addTaskMenuOpen} onClose={handleCloseAddTaskMenu} />
             </SwipeableDrawer>
+
+            {/* Add Event Menu */}
+            <SwipeableDrawer
+                anchor="bottom"
+                open={addTaskMenuOpen}
+                onClose={() => setAddTaskMenuOpen(false)}
+                disableSwipeToOpen={false}
+            >
+                <AddTaskMenu isOpen={addTaskMenuOpen} onClose={handleCloseAddTaskMenu} />
+            </SwipeableDrawer>
+
+            {/* Add Habit Menu */}
+            <SwipeableDrawer
+                anchor="bottom"
+                open={addTaskMenuOpen}
+                onClose={() => setAddTaskMenuOpen(false)}
+                disableSwipeToOpen={false}
+            >
+                <AddTaskMenu isOpen={addTaskMenuOpen} onClose={handleCloseAddTaskMenu} />
+            </SwipeableDrawer>
+
         </div>
     );
 }
