@@ -6,7 +6,6 @@ function TaskContainer() {
 
     return (
         <div className="taskContainer">
-            <HabitContainer />
             <p>Add a task, event, or to-do item by tapping “+” down below</p>
 
             <ul>

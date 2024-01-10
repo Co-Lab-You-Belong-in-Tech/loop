@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import IconButton from '@mui/joy/IconButton';
 import Drawer from '@mui/joy/Drawer';
 import List from '@mui/joy/List';
@@ -46,7 +45,7 @@ function Home() {
     return (
         <div className="home">
             <IconButton color="neutral" onClick={handleMenuButtonClick}>
-                <MenuIcon />
+                <MenuIcon className='homeMenuIcon' />
             </IconButton>
             <Drawer open={menuOpen} onClose={handleCloseMenuButtonClick}>
                 <List size="lg" component="nav" sx={{ flex: 'none', fontSize: 'xl', '& > div': { justifyContent: 'center' } }}>
@@ -83,8 +82,8 @@ function Home() {
             </SwipeableDrawer>
             <Header />
             <TaskContainer />
-            <IconButton variant="soft" aria-label="Add Habit or Task" onClick={handleAddButtonClick}>
-                <AddIcon />
+            <IconButton className='addButton' variant="soft" aria-label="Add Habit or Task" onClick={handleAddButtonClick}>
+                <AddIcon  className='addButtonIcon'/>
             </IconButton>
 
             {/* AddTaskMenu */}
