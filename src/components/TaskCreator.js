@@ -55,8 +55,8 @@ function TaskCreator() {
 
     const exitTaskCreator = () => {
         handleAddTask();
-        setOpen(true)
-    }
+        setOpen(true);
+    };
     
     return (
         <div className="taskCreator">
@@ -175,7 +175,7 @@ function TaskCreator() {
                 </select>
             </div>
 
-            <button onClick={handleAddTask}>Add Task</button>
+            <button className="addTaskButtonCreator" onClick={handleAddTask}>Add Task</button>
         </div>
     );
 }

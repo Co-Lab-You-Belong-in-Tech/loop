@@ -47,25 +47,29 @@ function Home() {
             <IconButton color="neutral" onClick={handleMenuButtonClick}>
                 <MenuIcon className='homeMenuIcon' />
             </IconButton>
-            <Drawer open={menuOpen} onClose={handleCloseMenuButtonClick}>
-                <List size="lg" component="nav" sx={{ flex: 'none', fontSize: 'xl', '& > div': { justifyContent: 'center' } }}>
+            
+            <Drawer className='sideMenuContainer' open={menuOpen} onClose={handleCloseMenuButtonClick}>
+                <List size="lg" 
+                component="nav"
+                sx={{ flex: 'none', 
+                fontSize: 'xl', }}>
                     <ListItemButton>
-                        <Link to="/" className="linkComponent"><span className="material-icons">
+                        <Link to="/" className="linkComponent sideMenu"><span className="material-icons sideMenuIcon">
                             calendar_today
                         </span>Events</Link>
                     </ListItemButton>
                     <ListItemButton>
-                        <Link to="/" className="linkComponent"><span className="material-icons">
+                        <Link to="/" className="linkComponent sideMenu"><span className="material-icons sideMenuIcon">
                             content_paste
                         </span>Tasks</Link>
                     </ListItemButton>
                     <ListItemButton>
-                        <Link to="/" className="linkComponent"><span className="material-icons">
+                        <Link to="/" className="linkComponent sideMenu"><span className="material-icons sideMenuIcon">
                             check_circle_outline
                         </span>To-Do</Link>
                     </ListItemButton>
                     <ListItemButton>
-                        <Link to="/" className="linkComponent"><span className="material-icons">
+                        <Link to="/" className="linkComponent sideMenu"><span className="material-icons sideMenuIcon">
                             favorite
                         </span>Habit Tracker</Link>
                     </ListItemButton>
@@ -80,9 +84,20 @@ function Home() {
             >
                 <BottomMenu isOpen={bottomMenuOpen} onClose={handleCloseBottomMenu} onTasksLinkClick={handleTasksLinkClick} />
             </SwipeableDrawer>
+
             <Header />
+
             <TaskContainer />
-            <IconButton className='addButton' variant="soft" aria-label="Add Habit or Task" onClick={handleAddButtonClick}>
+
+            <IconButton 
+            className='addButton' 
+            variant="soft" 
+            aria-label="Add Habit or Task" 
+            onClick={handleAddButtonClick}
+            style={{ color: '#0C626A', 
+                backgroundColor: '#E3EFFB'
+                    }}
+            >
                 <AddIcon  className='addButtonIcon'/>
             </IconButton>
 

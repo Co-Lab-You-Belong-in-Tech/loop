@@ -416,9 +416,25 @@ img {
     padding-left: 17px;
 }
 
-.addButton{
-    color: #0C626A;
-    background-color: #E3EFFB;
+.addButton {
+    position: fixed !important;
+    bottom: 16px !important;
+    right: 16px !important;
+    z-index: 1000 !important;
+}
+
+.sideMenu {
+    color: #1D1B20;
+    padding: 10px 0;
+}
+
+.sideMenuIcon {
+    color: #636B74;
+    margin-right: 10px;
+}
+
+.sideMenuContainer{
+    margin-top: 10px;
 }
 
 /* ***************TaskContainer.js*************** */
@@ -475,6 +491,51 @@ img {
     color: red;
 }
 
+/* *****************TaskCreator.js********************* */
+.taskCreator {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.creatorTitle {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.taskCreator label {
+    margin-bottom: 5px;
+}
+
+.taskCreator input,
+.taskCreator select {
+    width: 100%;
+    padding: 20px;
+    margin: 5px 0 20px 0;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.taskCreator button {
+    width: 100%;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.taskCreator .MuiButton-root {
+    align-self: end;
+    width: auto;
+}
+
+.addTaskButtonCreator{
+    padding: 20px;
+    background-color: #0B6BCB;
+    color: white;
+}
 
 @media (max-width: 575px) {
     /* styles for extra small screens */
