@@ -9,7 +9,7 @@ import ListItemButton from '@mui/joy/ListItemButton';
 import Box from '@mui/material/Box';
 import List from '@mui/joy/List';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import AddTaskMenu from './AddTaskMenu';  // Import the AddTaskMenu component
+import AddTaskMenu from './AddTaskMenu'; 
 
 const drawerBleeding = 56;
 
@@ -40,6 +40,33 @@ function BottomMenu({ isOpen, onClose, onTasksLinkClick }) {
         onClose();
         onTasksLinkClick();  // Call the function to open AddTaskMenu
     };
+
+    const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
+        borderRadius: '16px',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: theme.palette.mode === 'light' ? grey[200] : grey[700],
+        color: theme.palette.mode === 'light' ? theme.palette.text.primary : theme.palette.text.secondary,
+        padding: '16px',
+        height: '120px',
+        textDecoration: 'none',
+        textAlign: 'center',
+        '&:hover': {
+            backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[800],
+        },
+        '& .material-icons': {
+            fontSize: '2rem',
+            marginBottom: '8px',
+            display: 'block',
+            color: '#636B74',
+        },
+        '& a': {
+            color: 'black', 
+        }
+    }));
 
     return (
         <Root>
@@ -73,8 +100,8 @@ function BottomMenu({ isOpen, onClose, onTasksLinkClick }) {
                     sx={{
                         position: 'absolute',
                         top: 0,
-                        borderTopLeftRadius: 0,
-                        borderTopRightRadius: 0,
+                        borderTopLeftRadius: '50px',
+                        borderTopRightRadius: '50px',
                         visibility: 'visible',
                         right: 0,
                         left: 0,
@@ -87,30 +114,35 @@ function BottomMenu({ isOpen, onClose, onTasksLinkClick }) {
                         sx={{
                             display: 'grid',
                             gridTemplateColumns: 'repeat(2, 1fr)',
+                            marginTop: '20px',
                             gap: '8px',
                             fontSize: 'xl',
+                            padding: '16px', 
+                            alignItems: 'center', 
+                            justifyContent: 'center', 
+                            height: '100%',
                         }}
                     >
-                        <ListItemButton>
+                        <StyledListItemButton>
                             <Link to="/" className="linkComponent" onClick={() => onClose()}>
                                 <span className="material-icons">calendar_today</span>Add Event
                             </Link>
-                        </ListItemButton>
-                        <ListItemButton>
+                        </StyledListItemButton>
+                        <StyledListItemButton>
                             <Link className="linkComponent" onClick={handleTasksLinkClick}>
                                 <span className="material-icons">content_paste</span>Add Task
                             </Link>
-                        </ListItemButton>
-                        <ListItemButton>
+                        </StyledListItemButton>
+                        <StyledListItemButton>
                             <Link to="/" className="linkComponent" onClick={() => onClose()}>
                                 <span className="material-icons">favorite</span>Add Habit
                             </Link>
-                        </ListItemButton>
-                        <ListItemButton>
+                        </StyledListItemButton>
+                        <StyledListItemButton>
                             <Link to="/todocreator" className="linkComponent" onClick={() => onClose()}>
                                 <span className="material-icons">check_circle_outline</span>Add To-Do
                             </Link>
-                        </ListItemButton>
+                        </StyledListItemButton>
                     </List>
                 </StyledBox>
             </SwipeableDrawer>

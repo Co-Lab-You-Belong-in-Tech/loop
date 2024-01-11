@@ -21,6 +21,20 @@ const StyledBox = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
 }));
 
+const StyledLink = styled(Link)(({ theme }) => ({
+    display: 'block',
+    borderRadius: '8px', // Adjust the roundness
+    boxShadow: theme.palette.mode === 'light' ? '0px 5px 10px rgba(0, 0, 0, 0.1)' : '0px 5px 5px rgba(255, 255, 255, 0.1)', // Adjust shadow color and intensity
+    margin: '8px', // Add space on each side
+    padding: '16px', // Adjust the internal padding
+    textDecoration: 'none',
+    width: '100%',
+    color: 'inherit', // Inherit text color from parent
+    '&:hover': {
+        backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[800],
+    },
+}));
+
 const Puller = styled(Box)(({ theme }) => ({
     width: 30,
     height: 6,
@@ -29,6 +43,7 @@ const Puller = styled(Box)(({ theme }) => ({
     position: 'absolute',
     top: 8,
     left: 'calc(50% - 15px)',
+    marginTop: "8px",
 }));
 
 const DrawerPaper = styled('div')({
@@ -71,10 +86,11 @@ function AddTaskMenu({ isOpen, onClose }) {
                         >
                             <Puller />
                             <List size="lg" component="nav">
+                                <h2 className='addTaskTitle'>Add Task</h2>
                                 <ListItemButton>
-                                    <Link to="/taskcreator" className="linkComponent" onClick={() => onClose()}>
-                                        <h3><span class="material-icons">add</span>Create Task</h3>
-                                    </Link>
+                                    <StyledLink to="/taskcreator" className="linkComponent" onClick={() => onClose()}>
+                                        <h3 className='createPlusTitle'><span class="material-icons createTaskPlus">add</span>Create Task</h3>
+                                    </StyledLink>
                                 </ListItemButton>
                             </List>
                         </StyledBox>
@@ -88,4 +104,3 @@ function AddTaskMenu({ isOpen, onClose }) {
 }
 
 export default AddTaskMenu;
-

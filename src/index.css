@@ -265,7 +265,8 @@ html {
 }
 
 body {
-    margin: 0;
+    margin: 0 auto;
+    max-width: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Inter', sans-serif;
@@ -311,6 +312,7 @@ img {
     /* Support for IE. */
     font-feature-settings: 'liga';
 }
+
 
 /************************** welcome.js ***************************/
 .welcomePage {
@@ -429,6 +431,21 @@ img {
 .habitContainer {
     color: #6F797A;
     padding-left: 17px;
+}
+
+/* ****************AddTaskMenu.js*************************** */
+.addTaskTitle {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.createTaskPlus{
+    margin-right: 15px;
+}
+
+.createPlusTitle {
+    display: flex;
+    align-items: center;
 }
 
 .linkComponent {
