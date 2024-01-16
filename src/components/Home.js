@@ -11,11 +11,13 @@ import Header from './Header';
 import TaskContainer from './TaskContainer';
 import BottomMenu from './BottomMenu';
 import AddTaskMenu from './AddTaskMenu';
+import AddHabitMenu from './AddHabitMenu';
 
 function Home() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [bottomMenuOpen, setBottomMenuOpen] = useState(false);
     const [addTaskMenuOpen, setAddTaskMenuOpen] = useState(false);
+    const [addHabitMenuOpen, setAddHabitMenuOpen] = useState(false);
 
     const handleMenuButtonClick = () => {
         setMenuOpen(!menuOpen);
@@ -40,6 +42,11 @@ function Home() {
 
     const handleCloseAddTaskMenu = () => {
         setAddTaskMenuOpen(false);
+    };
+
+    const handleAddHabitClick = () => {
+        setBottomMenuOpen(false); 
+        setAddHabitMenuOpen(true);
     };
 
     return (
@@ -82,7 +89,7 @@ function Home() {
                 onClose={() => setBottomMenuOpen(false)}
                 disableSwipeToOpen={false}
             >
-                <BottomMenu isOpen={bottomMenuOpen} onClose={handleCloseBottomMenu} onTasksLinkClick={handleTasksLinkClick} />
+                <BottomMenu isOpen={bottomMenuOpen} onClose={handleCloseBottomMenu} onTasksLinkClick={handleTasksLinkClick} onHabitLinkClick={handleAddHabitClick}/>
             </SwipeableDrawer>
 
             <Header />
@@ -111,24 +118,14 @@ function Home() {
                 <AddTaskMenu isOpen={addTaskMenuOpen} onClose={handleCloseAddTaskMenu} />
             </SwipeableDrawer>
 
-            {/* Add Event Menu */}
-            <SwipeableDrawer
-                anchor="bottom"
-                open={addTaskMenuOpen}
-                onClose={() => setAddTaskMenuOpen(false)}
-                disableSwipeToOpen={false}
-            >
-                <AddTaskMenu isOpen={addTaskMenuOpen} onClose={handleCloseAddTaskMenu} />
-            </SwipeableDrawer>
-
             {/* Add Habit Menu */}
             <SwipeableDrawer
                 anchor="bottom"
-                open={addTaskMenuOpen}
-                onClose={() => setAddTaskMenuOpen(false)}
+                open={addHabitMenuOpen}
+                onClose={() => setAddHabitMenuOpen(false)}
                 disableSwipeToOpen={false}
             >
-                <AddTaskMenu isOpen={addTaskMenuOpen} onClose={handleCloseAddTaskMenu} />
+                <AddHabitMenu isOpen={addHabitMenuOpen} onClose={() => setAddHabitMenuOpen(false)} />
             </SwipeableDrawer>
 
         </div>

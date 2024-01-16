@@ -8,6 +8,8 @@ import TaskCreator from './components/TaskCreator';
 import ToDoCreator from './components/ToDoCreator';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import AddHabitMenu from './components/AddHabitMenu';
+import HabitCreator from './components/HabitCreator';
 
 function App() {
     
@@ -21,6 +23,8 @@ function App() {
                     <Route path="/name" element={<NameInput />} />
                     <Route path='/taskcreator' element={<TaskCreator />} />
                     <Route path="/todocreator" element={<ToDoCreator />} />
+                    <Route path="/addhabitmenu" element={<AddHabitMenu />} />
+                    <Route path="/habitcreator" element={<HabitCreator />} />
                 </Routes>
         </LocalizationProvider>
         </>

@@ -51,9 +51,10 @@ const DrawerPaper = styled('div')({
     transition: 'transform 0.3s ease-in-out',
 });
 
-function AddTaskMenu({ isOpen, onClose }) {
+
+function AddHabitMenu({ isOpen, onClose }) {
     return (
-        <div className="addTaskMenu">
+        <div className="addHabitMenu">
             <Root>
                 <CssBaseline />
                 <SwipeableDrawer
@@ -86,10 +87,10 @@ function AddTaskMenu({ isOpen, onClose }) {
                         >
                             <Puller />
                             <List size="lg" component="nav">
-                                <h2 className='addTaskTitle'>Add Task</h2>
+                                <h2 className='addHabitTitle'>Add Habit</h2>
                                 <ListItemButton>
-                                    <StyledLink to="/taskcreator" className="linkComponent" onClick={() => onClose()}>
-                                        <h3 className='createPlusTitle'><span class="material-icons createTaskPlus">add</span>Create Task</h3>
+                                    <StyledLink to="/habitcreator" className="linkComponent" onClick={() => onClose()}>
+                                        <h3 className='createPlusTitle'><span class="material-icons createTaskPlus">add</span>Create Habit</h3>
                                     </StyledLink>
                                 </ListItemButton>
                             </List>
@@ -97,10 +98,10 @@ function AddTaskMenu({ isOpen, onClose }) {
                     </DrawerPaper>
                 </SwipeableDrawer>
             </Root>
-            <h2>Add Task</h2>
+            <h2>Add Habit</h2>
             <Divider orientation="horizontal" />
         </div>
     );
 }
 
-export default AddTaskMenu;
+export default AddHabitMenu;

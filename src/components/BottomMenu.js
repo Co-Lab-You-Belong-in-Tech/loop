@@ -32,7 +32,7 @@ const Puller = styled(Box)(({ theme }) => ({
     left: 'calc(50% - 15px)',
 }));
 
-function BottomMenu({ isOpen, onClose, onTasksLinkClick }) {
+function BottomMenu({ isOpen, onClose, onTasksLinkClick, onHabitLinkClick }) {
     const [tasksLinkClicked, setTasksLinkClicked] = useState(false);
 
     const handleTasksLinkClick = () => {
@@ -85,7 +85,7 @@ function BottomMenu({ isOpen, onClose, onTasksLinkClick }) {
                 open={isOpen}
                 onClose={() => onClose()}
                 swipeAreaWidth={drawerBleeding}
-                disableSwipeToOpen={false}
+                disableSwipeToOpen={true}
                 ModalProps={{
                     keepMounted: true,
                 }}
@@ -134,7 +134,7 @@ function BottomMenu({ isOpen, onClose, onTasksLinkClick }) {
                             </Link>
                         </StyledListItemButton>
                         <StyledListItemButton>
-                            <Link to="/" className="linkComponent" onClick={() => onClose()}>
+                            <Link className="linkComponent" onClick={onHabitLinkClick}>
                                 <span className="material-icons">favorite</span>Add Habit
                             </Link>
                         </StyledListItemButton>

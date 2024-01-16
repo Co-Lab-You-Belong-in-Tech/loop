@@ -450,7 +450,8 @@ img {
 }
 
 /* ****************AddTaskMenu.js*************************** */
-.addTaskTitle {
+.addTaskTitle,
+.addHabitTitle {
     text-align: center;
     margin-top: 40px;
 }
@@ -531,10 +532,22 @@ img {
     width: auto;
 }
 
-.addTaskButtonCreator{
+.addTaskButtonCreator,
+.addHabitButtonCreator{
     padding: 20px;
     background-color: #0B6BCB;
     color: white;
+}
+
+/* ***************************HabitCreator.js***************************** */
+fieldset {
+    display: flex;
+    justify-content: space-evenly;
+    border: none;
+}
+
+.required{
+    color: red;
 }
 
 @media (max-width: 575px) {
