@@ -169,12 +169,13 @@ function HabitCreator() {
                         value={value}
                         onChange={(newValue) => setValue(newValue)}/>}
                     </div>
+
+                    <button className="addHabitButtonCreator">Add Habit</button>
                 </TabPanel>
                 <TabPanel value={1} sx={{ backgroundColor: 'white' }}>
                     <p>progress stuff in here</p>
                 </TabPanel>
             </Tabs>
-            <button className="addHabitButtonCreator">Add Habit</button>
         </div>
     );
 }

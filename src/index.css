@@ -504,26 +504,22 @@ img {
     margin-top: 5px;
 }
 
-.taskCreator label {
-    margin-bottom: 5px;
-}
-
-.taskCreator input,
-.taskCreator select {
+.taskInput {
     width: 100%;
-    padding: 20px;
-    margin: 5px 0 20px 0;
-    box-sizing: border-box;
-    background-color: white;
-    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: rgba(251, 252, 254, 1);
     border: none;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.inputLabel {
+    background-color: rgba(251, 252, 254, 1);
 }
 
 .taskCreator button {
     width: 100%;
     border: none;
-    border-radius: 7px;
+    border-radius: 12px;
     cursor: pointer;
 }
 
@@ -537,6 +533,16 @@ img {
     padding: 20px;
     background-color: #0B6BCB;
     color: white;
+}
+
+.errorInput {
+    border: 1px solid red;
+}
+
+.errorText {
+    color: red;
+    padding: 0;
+    margin-top: -15px;
 }
 
 /* ***************************HabitCreator.js***************************** */
