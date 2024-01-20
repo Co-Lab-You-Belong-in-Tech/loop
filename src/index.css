@@ -556,6 +556,44 @@ fieldset {
     color: red;
 }
 
+/* ***********************ToDoCreator.js */
+
+.toDoCreator {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.toDoCreator .MuiButton-root {
+    align-self: end;
+    width: auto;
+}
+
+.MuiFormControl-root {
+    width: 100%;
+}
+
+.toDoHeader {
+    text-align: center;
+}
+
+.addToDo {
+    width: 100%;
+    margin-top: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.toDoInput {
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: rgba(251, 252, 254, 1);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 575px) {
     /* styles for extra small screens */
 }

@@ -1,32 +1,36 @@
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import FormHelperText from '@mui/joy/FormHelperText';
+import FormControl from '@mui/material/FormControl';
 import Textarea from '@mui/joy/Textarea';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
 import React, { useState } from 'react';
-import { Button } from '@mui/joy';
+import Button from '@mui/material/Button';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet'
+import Select from '@mui/material/Select';
+import Divider from '@mui/joy/Divider';
+import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+import { selectClasses } from '@mui/joy/Select';
+import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 
 function ToDoCreator() {
-    const [toDoTitle, setToDoTitle] = useState('');
-    const [priority, setPriority] = useState('');
-    const [notes, setNotes] = useState('');
     const [error, setError] = useState('');
     const [open, setOpen] = useState(false);
+    const [toDoData, setToDoData] = useState({
+        toDoTitle: '',
+        priority: '',
+        notes: '',
+    });
 
-    const handleTitleChange = (e) => {
-        setToDoTitle(e.target.value);
-    };
+    const handleInputChange = (fieldName, event) => {
+        const value = event.target.value;
 
-    const handlePriorityChange = (e) => {
-        setPriority(e.target.value);
-    };
-
-    const handleNotesChange = (e) => {
-        setNotes(e.target.value);
+        setToDoData((prevToDoData) => ({
+            ...prevToDoData,
+            [fieldName]: value,
+        }));
     };
 
     const exitToDoCreator = () => {
@@ -34,27 +38,33 @@ function ToDoCreator() {
     }
 
     const handleAddToDo = () => {
-        // Validate fields
-        if (!toDoTitle || !priority || !notes) {
-            setError('Please fill in all fields');
+        const errors = {};
+
+        // Check if all fields are filled
+        if (!toDoData.toDoTitle) errors.toDoTitle = 'Please enter a Task Title';
+        if (!toDoData.priority) errors.priority = 'Please select a Priority';
+
+        if (Object.keys(errors).length > 0) {
+            setError(errors);
             return;
         }
 
-        // Create an object with the saved state values
-        const todoObject = {
-            toDoTitle,
-            priority,
-            notes,
-        };
-
-        // Do something with the todoObject
-        console.log('ToDo Object:', todoObject);
-
-        // Reset the form and error state
-        setToDoTitle('');
-        setPriority('');
-        setNotes('');
+        // Clear any previous error
         setError('');
+
+        // axios.post('https://loop-i5gz.onrender.com/api/task/add', taskData)
+        //     .then((response) => {
+        //         console.log(JSON.stringify(response.data));
+        //         // Handle the response if needed
+        //     })
+        //     .catch((error) => {
+        //         console.error('Error adding task:', error);
+        //         // Handle API call error
+        //         // Set an error message
+        //         setError('Error adding task. Please try again.');
+        //     });
+
+        console.log(toDoData);
     };
 
     return (
@@ -98,47 +108,85 @@ function ToDoCreator() {
                     </Sheet>
                 </Modal>
             </React.Fragment>
-            <h2 className="taskTitle">Add to-do</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <h2 className="toDoHeader">Add to-do</h2>
+
+
+            {/* To do title */}
             <div>
-                <label>To-Do Title</label>
-                <input
-                    type="text"
-                    placeholder="To-do title here..."
-                    value={toDoTitle}
-                    onChange={handleTitleChange}
-                />
+                <FormControl >
+                    <TextField
+                        id='toDoTitle'
+                        className={`toDoInput ${error && !toDoData.toDoTitle ? 'error' : ''}`}
+                        label="To Do Title"
+                        name="toDoTitle"
+                        value={toDoData.toDoTitle}
+                        onChange={(e) => handleInputChange('toDoTitle', e)}
+                        sx={{
+                            width: '100%',
+                            marginBottom: '20px',
+                            borderRadius: '12px'
+                        }}
+                    />
+                </FormControl>
+                {error.toDoTitle && <p className="errorText">{error.toDoTitle}</p>}
             </div>
 
+            {/* Priority */}
             <div>
-                <label>Priority</label>
-                <select value={priority} onChange={handlePriorityChange}>
-                    <option value="">Select priority…</option>
-                    <option value="High"><i className="fa-solid fa-flag redFlag"></i>High</option>
-                    <option value="Medium"><i className="fa-solid fa-flag orangeFlag"></i>Medium</option>
-                    <option value="Low"><i className="fa-solid fa-flag greenFlag"></i>Low</option>
-                </select>
+                <FormControl >
+                    <InputLabel
+                        htmlFor="priority"
+                        name="Priority"
+                        className={`inputLabel ${error && !toDoData.priority ? 'error' : ''}`}
+                    >
+                        Select priority
+                    </InputLabel>
+                    <Select
+                        id='priority'
+                        label="Priority"
+                        className={`toDoInput ${error && !toDoData.priority ? 'error' : ''}`}
+                        value={toDoData.priority}
+                        onChange={(e) => handleInputChange('priority', e)}
+                        indicator={<KeyboardArrowDown />}
+                        sx={{
+                            borderRadius: '12px',
+                            width: '100%',
+                            [`& .${selectClasses.indicator}`]: {
+                                transition: '0.2s',
+                                [`&.${selectClasses.expanded}`]: {
+                                    transform: 'rotate(-180deg)',
+                                },
+                            },
+                        }}
+                    >
+                        <MenuItem value="High"><i class="fa-solid fa-flag redFlag"></i> High</MenuItem>
+                        <Divider />
+                        <MenuItem value="Medium"><i class="fa-solid fa-flag orangeFlag"></i> Medium</MenuItem>
+                        <Divider />
+                        <MenuItem value="Low"><i class="fa-solid fa-flag greenFlag"></i>Low</MenuItem>
+                    </Select>
+                </FormControl>
+                {error.priority && <p className="errorText">{error.priority}</p>}
             </div>
 
-            <div className="textareaToDo">
-                <label htmlFor="notes">Notes</label>
-                <textarea
-                    id="notes"
-                    name="notes"
-                    rows="5"
-                    cols="33"
-                    placeholder="Start typing"
-                    value={notes}
-                    onChange={handleNotesChange}
-                ></textarea>
-            </div>
 
-            <Button size="lg" onClick={handleAddToDo}>
-                Add to Do
-            </Button>
+
+            {/* Text Area */}
+            <FormControl>
+                <InputLabel
+                    htmlFor="notes"
+                    name="Notes"
+                >
+                </InputLabel>
+                <Textarea 
+                    sx={{ borderRadius: '12px', }}
+                placeholder={'Notes'}
+                minRows={6} />
+            </FormControl>
+
+            <button className="addToDo addTaskButtonCreator" onClick={handleAddToDo}>Add To Do</button>
         </div>
     );
 }
 
 export default ToDoCreator;
-
