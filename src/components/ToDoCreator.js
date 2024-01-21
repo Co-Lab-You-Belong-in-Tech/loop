@@ -116,15 +116,15 @@ function ToDoCreator() {
                 <FormControl >
                     <TextField
                         id='toDoTitle'
-                        className={`toDoInput ${error && !toDoData.toDoTitle ? 'error' : ''}`}
+                        className={`toDoInput ${error && !toDoData.toDoTitle ? 'error' : ''} `}
                         label="To Do Title"
                         name="toDoTitle"
                         value={toDoData.toDoTitle}
                         onChange={(e) => handleInputChange('toDoTitle', e)}
+                        style={{ borderRadius: '12px' }}
                         sx={{
                             width: '100%',
                             marginBottom: '20px',
-                            borderRadius: '12px'
                         }}
                     />
                 </FormControl>

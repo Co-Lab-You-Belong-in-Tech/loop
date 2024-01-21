@@ -129,6 +129,7 @@ function TaskCreator() {
                         onChange={(e) => handleInputChange('taskTitle', e)}
                         sx={{
                             width: '100%',
+                            borderRadius: '12px',
                             marginBottom: '20px'
                         }}
                     />
@@ -154,6 +155,7 @@ function TaskCreator() {
                         indicator={<KeyboardArrowDown />}
                         sx={{
                             width: '100%',
+                            borderRadius: '12px',
                             [`& .${selectClasses.indicator}`]: {
                                 transition: '0.2s',
                                 [`&.${selectClasses.expanded}`]: {
@@ -193,6 +195,7 @@ function TaskCreator() {
                         indicator={<KeyboardArrowDown />}
                         sx={{
                             width: '100%',
+                            borderRadius: '12px',
                             [`& .${selectClasses.indicator}`]: {
                                 transition: '0.2s',
                                 [`&.${selectClasses.expanded}`]: {
@@ -231,6 +234,7 @@ function TaskCreator() {
                         onChange={(e) => handleInputChange('categoryType', e)}
                         indicator={<KeyboardArrowDown />}
                         sx={{
+                            borderRadius: '12px',
                             width: '100%',
                             [`& .${selectClasses.indicator}`]: {
                                 transition: '0.2s',
@@ -271,6 +275,7 @@ function TaskCreator() {
                         indicator={<KeyboardArrowDown />}
                         sx={{
                             width: '100%',
+                            borderRadius: '12px',
                             [`& .${selectClasses.indicator}`]: {
                                 transition: '0.2s',
                                 [`&.${selectClasses.expanded}`]: {
