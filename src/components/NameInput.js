@@ -12,7 +12,6 @@ function NameInput() {
 
     const handleChange = (e) => {
         setUserName(e.target.value);
-        console.log(userName);
     };
 
     return (

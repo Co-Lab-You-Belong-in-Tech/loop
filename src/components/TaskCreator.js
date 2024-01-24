@@ -41,7 +41,7 @@ function TaskCreator() {
         const errors = {};
 
         // Check if all fields are filled
-        if (!taskData.taskTitle) errors.taskTitle = 'Please enter a Task Title';
+        if (!taskData.taskTitle) errors.taskTitle = 'Please enter a title for your To Do';
         if (!taskData.estimatedTime) errors.estimatedTime = 'Please select an Estimated Time';
         if (!taskData.categoryColor) errors.categoryColor = 'Please select a Category Color';
         if (!taskData.categoryType) errors.categoryType = 'Please select a Category Type';
@@ -55,17 +55,17 @@ function TaskCreator() {
         // Clear any previous error
         setError('');
 
-        // axios.post('https://loop-i5gz.onrender.com/api/task/add', taskData)
-        //     .then((response) => {
-        //         console.log(JSON.stringify(response.data));
-        //         // Handle the response if needed
-        //     })
-        //     .catch((error) => {
-        //         console.error('Error adding task:', error);
-        //         // Handle API call error
-        //         // Set an error message
-        //         setError('Error adding task. Please try again.');
-        //     });
+        axios.post('https://loop-i5gz.onrender.com/api/task/add', taskData)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+                // Handle the response if needed
+            })
+            .catch((error) => {
+                console.error('Error adding task:', error);
+                console.error('Response data:', error.response.data);
+                console.error('Response status:', error.response.status);
+                setError('Error adding task. Please try again.');
+            });
 
         console.log(taskData);
     };

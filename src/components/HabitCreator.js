@@ -4,6 +4,8 @@ import Button from '@mui/joy/Button';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 import Typography from '@mui/joy/Typography';
+import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
 import Sheet from '@mui/joy/Sheet'
 import { Link } from 'react-router-dom';
 import Tabs from '@mui/joy/Tabs';
@@ -19,10 +21,26 @@ function HabitCreator() {
     const [open, setOpen] = useState(false);
     const [checked, setChecked] = useState(false);
     const [value, setValue] = useState(dayjs());
+    const [habitData, setHabitData] = useState({
+        habitTitle: '',
+        icon: '',
+        repeatsOn: '',
+        startDate: '',
+        reminderTime: ''
+    });
 
     const exitHabitCreator = () => {
 
         setOpen(true);
+    };
+
+    const handleInputChange = (fieldName, event) => {
+        const value = event.target.value;
+
+        setHabitData((prevHabitData) => ({
+            ...prevHabitData,
+            [fieldName]: value,
+        }));
     };
     return (
         <div className="habitCreatorContainer">
@@ -73,7 +91,7 @@ function HabitCreator() {
                     <Tab sx={{ backgroundColor: 'transparent', '&.Mui-selected': { backgroundColor: 'white' } }} indicatorInset={true} >Progress</Tab>
                 </TabList>
                 <TabPanel value={0} sx={{ backgroundColor: 'white' }}>
-                    <div className="habitTitleInputandIcon">
+                    {/* <div className="habitTitleInputandIcon">
                         <label>Habit Title<span className='required'>*</span></label>
                         <input
                             type="text"
@@ -81,7 +99,26 @@ function HabitCreator() {
                         />
                         <label>Icon<span className='required'>*</span></label>
                         <Button sx={{ backgroundColor: 'white' }}><KeyboardArrowDown sx={{color: 'black'}}  /></Button>
-                    </div>
+                    </div> */}
+
+                    {/* <div className="habitTitleInputandIcon">
+                        <FormControl >
+                            <TextField
+                                id='habitDoTitle'
+                                className={`toDoInput ${error && !toDoData.toDoTitle ? 'error' : ''} `}
+                                label="Habit Title"
+                                name="habitTitle"
+                                value={''}
+                                onChange={(e) => handleInputChange('habitTitle', e)}
+                                style={{ borderRadius: '12px' }}
+                                sx={{
+                                    width: '100%',
+                                    marginBottom: '20px',
+                                }}
+                            />
+                        </FormControl>
+                        {error.toDoTitle && <p className="errorText">{error.toDoTitle}</p>}
+                    </div> */}
 
                     <div className="repeats">
                         <fieldset>
