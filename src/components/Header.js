@@ -1,5 +1,5 @@
 import logo2 from '../images/logo2.png';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/joy';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import dayjs from 'dayjs';
@@ -8,12 +8,21 @@ import HabitContainer from './HabitContainer';
 function Header() {
     const [isCalendarOpen, setCalendarOpen] = useState(false);
     const date = new Date();
-    const optionsDayOfWeek = { weekday: 'long' };
-    const optionsDayAndMonth = { day: 'numeric', month: 'long' };
-    const [selectedDate, setSelectedDate] = useState(dayjs(new Date()));
+    const [selectedDate, setSelectedDate] = useState(dayjs());
+    const [dayOfWeek, setDayOfWeek] = useState('');
+    const [dayAndMonth, setDayAndMonth] = useState('');
+
+    useEffect(() => {
+        const formattedDayOfWeek = selectedDate.format('dddd');
+        const formattedDayAndMonth = selectedDate.format('MMMM D');
+
+        // Set the updated values in the state
+        setDayOfWeek(formattedDayOfWeek);
+        setDayAndMonth(formattedDayAndMonth);
+    }, [selectedDate]);
 
     const handleDateChange = (date) => {
-        setSelectedDate(date.$d);
+        setSelectedDate(date);
         console.log(selectedDate)
     };
 
@@ -24,9 +33,6 @@ function Header() {
     const closeCalendar = () => {
         setCalendarOpen(false);
     };
-
-    const dayOfWeek = selectedDate.toLocaleDateString(undefined, optionsDayOfWeek);
-    const dayAndMonth = selectedDate.toLocaleDateString(undefined, optionsDayAndMonth);
 
     return (
         <div className="date">
