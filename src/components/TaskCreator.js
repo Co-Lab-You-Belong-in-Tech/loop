@@ -19,11 +19,13 @@ import axios from 'axios';
 function TaskCreator() {
     const [open, setOpen] = useState(false);
     const [taskData, setTaskData] = useState({
-        taskTitle: '',
-        estimatedTime: '',
-        categoryColor: '',
-        categoryType: '',
-        priority: '',
+        task_title: '',
+        description: "description",
+        estimated_time: '',
+        category_color: '',
+        category_type: '',
+        new_category: null,
+        task_priority: ''
     });
 
     const [error, setError] = useState('');
@@ -41,11 +43,11 @@ function TaskCreator() {
         const errors = {};
 
         // Check if all fields are filled
-        if (!taskData.taskTitle) errors.taskTitle = 'Please enter a title for your To Do';
-        if (!taskData.estimatedTime) errors.estimatedTime = 'Please select an Estimated Time';
-        if (!taskData.categoryColor) errors.categoryColor = 'Please select a Category Color';
-        if (!taskData.categoryType) errors.categoryType = 'Please select a Category Type';
-        if (!taskData.priority) errors.priority = 'Please select a Priority';
+        if (!taskData.task_title) errors.task_title = 'Please enter a title for your To Do';
+        if (!taskData.estimated_time) errors.estimated_time = 'Please select an Estimated Time';
+        if (!taskData.category_color) errors.category_color = 'Please select a Category Color';
+        if (!taskData.category_type) errors.category_type = 'Please select a Category Type';
+        if (!taskData.task_priority) errors.task_priority = 'Please select a Priority';
 
         if (Object.keys(errors).length > 0) {
             setError(errors);
@@ -57,8 +59,7 @@ function TaskCreator() {
 
         axios.post('https://loop-i5gz.onrender.com/api/task/add', taskData)
             .then((response) => {
-                console.log(JSON.stringify(response.data));
-                // Handle the response if needed
+                console.log(response.data.data[0]);
             })
             .catch((error) => {
                 console.error('Error adding task:', error);
@@ -122,11 +123,11 @@ function TaskCreator() {
                 <FormControl fullWidth>
                     <TextField
                         id='taskTitle'
-                        className={`taskInput ${error && !taskData.taskTitle ? 'error' : ''}`}
+                        className={`taskInput ${error && !taskData.task_title ? 'error' : ''}`}
                         label="Task Title"
                         name="taskTitle"
-                        value={taskData.taskTitle}
-                        onChange={(e) => handleInputChange('taskTitle', e)}
+                        value={taskData.task_title}
+                        onChange={(e) => handleInputChange('task_title', e)}
                         sx={{
                             width: '100%',
                             borderRadius: '12px',
@@ -134,7 +135,7 @@ function TaskCreator() {
                         }}
                     />
                 </FormControl>
-                {error.taskTitle && <p className="errorText">{error.taskTitle}</p>}
+                {error.task_title && <p className="errorText">{error.task_title}</p>}
             </div>
 
             {/* Estimated Time */}
@@ -143,15 +144,15 @@ function TaskCreator() {
                     <InputLabel
                         sx={{ textAlign: 'center', marginBottom: '8px' }}
                         htmlFor="estimatedTime"
-                        className={`inputLabel ${error && !taskData.estimatedTime ? 'error' : ''}`}
+                        className={`inputLabel ${error && !taskData.estimated_time ? 'error' : ''}`}
                     >
                         Estimated Time
                     </InputLabel>
                     <Select
                         id='estimatedTime'
-                        className={`taskInput ${error && !taskData.estimatedTime ? 'error' : ''}`}
-                        value={taskData.estimatedTime}
-                        onChange={(e) => handleInputChange('estimatedTime', e)}
+                        className={`taskInput ${error && !taskData.estimated_time ? 'error' : ''}`}
+                        value={taskData.estimated_time}
+                        onChange={(e) => handleInputChange('estimated_time', e)}
                         indicator={<KeyboardArrowDown />}
                         sx={{
                             width: '100%',
@@ -164,18 +165,18 @@ function TaskCreator() {
                             },
                         }}
                     >
-                        <MenuItem value="5">5 minutes</MenuItem>
+                        <MenuItem value="5 minutes">5 minutes</MenuItem>
                         <Divider />
-                        <MenuItem value="15">15 minutes</MenuItem>
+                        <MenuItem value="15 minutes">15 minutes</MenuItem>
                         <Divider />
-                        <MenuItem value="30">30 minutes</MenuItem>
+                        <MenuItem value="30 minutes">30 minutes</MenuItem>
                         <Divider />
-                        <MenuItem value="45">45 minutes</MenuItem>
+                        <MenuItem value="45 minutes">45 minutes</MenuItem>
                         <Divider />
-                        <MenuItem value="60">60 minutes</MenuItem>
+                        <MenuItem value="1 hour">1 Hour</MenuItem>
                     </Select>
                 </FormControl>
-                {error.estimatedTime && <p className="errorText">{error.estimatedTime}</p>}
+                {error.estimated_time && <p className="errorText">{error.estimated_time}</p>}
             </div>
 
             {/* Category Color */}
@@ -183,15 +184,15 @@ function TaskCreator() {
                 <FormControl fullWidth>
                     <InputLabel
                         htmlFor="categoryColor"
-                        className={`inputLabel ${error && !taskData.categoryColor ? 'error' : ''}`}
+                        className={`inputLabel ${error && !taskData.category_color ? 'error' : ''}`}
                     >
                         Category Color
                     </InputLabel>
                     <Select
                         id='categoryColor'
-                        className={`taskInput ${error && !taskData.categoryColor ? 'error' : ''}`}
-                        value={taskData.categoryColor}
-                        onChange={(e) => handleInputChange('categoryColor', e)}
+                        className={`taskInput ${error && !taskData.category_color ? 'error' : ''}`}
+                        value={taskData.category_color}
+                        onChange={(e) => handleInputChange('category_color', e)}
                         indicator={<KeyboardArrowDown />}
                         sx={{
                             width: '100%',
@@ -204,18 +205,18 @@ function TaskCreator() {
                             },
                         }}
                     >
-                        <MenuItem value="blue"><i class="fa-solid fa-circle blueCircle"></i> Blue</MenuItem>
+                        <MenuItem value="Blue"><i class="fa-solid fa-circle blueCircle"></i> Blue</MenuItem>
                         <Divider />
-                        <MenuItem value="green"><i class="fa-solid fa-circle greenCircle"></i> Green</MenuItem>
+                        <MenuItem value="Green"><i class="fa-solid fa-circle greenCircle"></i> Green</MenuItem>
                         <Divider />
-                        <MenuItem value="orange"><i class="fa-solid fa-circle orangeCircle"></i> Orange</MenuItem>
+                        <MenuItem value="Orange"><i class="fa-solid fa-circle orangeCircle"></i> Orange</MenuItem>
                         <Divider />
-                        <MenuItem value="purple"><i class="fa-solid fa-circle purpleCircle"></i> Purple</MenuItem>
+                        <MenuItem value="Purple"><i class="fa-solid fa-circle purpleCircle"></i> Purple</MenuItem>
                         <Divider />
-                        <MenuItem value="red"><i class="fa-solid fa-circle redCircle"></i>Red</MenuItem>
+                        <MenuItem value="Red"><i class="fa-solid fa-circle redCircle"></i>Red</MenuItem>
                     </Select>
                 </FormControl>
-                {error.categoryColor && <p className="errorText">{error.categoryColor}</p>}
+                {error.category_color && <p className="errorText">{error.category_color}</p>}
             </div>
 
             {/* Category Type */}
@@ -223,15 +224,15 @@ function TaskCreator() {
                 <FormControl fullWidth>
                     <InputLabel
                         htmlFor="categoryType"
-                        className={`inputLabel ${error && !taskData.categoryType ? 'error' : ''}`}
+                        className={`inputLabel ${error && !taskData.category_type ? 'error' : ''}`}
                     >
                         Select category type
                     </InputLabel>
                     <Select
                         id='categoryType'
-                        className={`taskInput ${error && !taskData.categoryType ? 'error' : ''}`}
-                        value={taskData.categoryType}
-                        onChange={(e) => handleInputChange('categoryType', e)}
+                        className={`taskInput ${error && !taskData.category_type ? 'error' : ''}`}
+                        value={taskData.category_type}
+                        onChange={(e) => handleInputChange('category_type', e)}
                         indicator={<KeyboardArrowDown />}
                         sx={{
                             borderRadius: '12px',
@@ -244,18 +245,18 @@ function TaskCreator() {
                             },
                         }}
                     >
-                        <MenuItem value="health">Health</MenuItem>
+                        <MenuItem value="Health">Health</MenuItem>
                         <Divider />
-                        <MenuItem value="household">Household</MenuItem>
+                        <MenuItem value="Household">Household</MenuItem>
                         <Divider />
-                        <MenuItem value="childcare">Childcare</MenuItem>
+                        <MenuItem value="Childcare">Childcare</MenuItem>
                         <Divider />
-                        <MenuItem value="errands">Errands</MenuItem>
+                        <MenuItem value="Errands">Errands</MenuItem>
                         <Divider />
-                        <MenuItem value="hobby">Hobby</MenuItem>
+                        <MenuItem value="Hobby">Hobby</MenuItem>
                     </Select>
                 </FormControl>
-                {error.categoryType && <p className="errorText">{error.categoryType}</p>}
+                {error.category_type && <p className="errorText">{error.category_type}</p>}
             </div>
 
             {/* Priority */}
@@ -263,15 +264,15 @@ function TaskCreator() {
                 <FormControl fullWidth>
                     <InputLabel
                         htmlFor="priority"
-                        className={`inputLabel ${error && !taskData.priority ? 'error' : ''}`}
+                        className={`inputLabel ${error && !taskData.task_priority ? 'error' : ''}`}
                     >
                         Select priority
                     </InputLabel>
                     <Select
                         id='priority'
-                        className={`taskInput ${error && !taskData.priority ? 'error' : ''}`}
-                        value={taskData.priority}
-                        onChange={(e) => handleInputChange('priority', e)}
+                        className={`taskInput ${error && !taskData.task_priority ? 'error' : ''}`}
+                        value={taskData.task_priority}
+                        onChange={(e) => handleInputChange('task_priority', e)}
                         indicator={<KeyboardArrowDown />}
                         sx={{
                             width: '100%',
@@ -291,7 +292,7 @@ function TaskCreator() {
                         <MenuItem value="Low"><i class="fa-solid fa-flag greenFlag"></i>Low</MenuItem>
                     </Select>
                 </FormControl>
-                {error.priority && <p className="errorText">{error.priority}</p>}
+                {error.task_priority && <p className="errorText">{error.task_priority}</p>}
             </div>
 
             <button className="addTaskButtonCreator" onClick={handleAddTask}>Add Task</button>
