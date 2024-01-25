@@ -69,27 +69,6 @@ function TaskCreator() {
             });
 
         console.log(taskData);
-        // let data = JSON.stringify({
-        //     "task_title": "hello"
-        // });
-
-        // let config = {
-        //     method: 'post',
-        //     maxBodyLength: Infinity,
-        //     url: 'https://loop-i5gz.onrender.com/api/task/add',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     data: data
-        // };
-
-        // axios(config)
-        //     .then((response) => {
-        //         console.log(JSON.stringify(response.data));
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     });
     };
 
     const exitTaskCreator = () => {

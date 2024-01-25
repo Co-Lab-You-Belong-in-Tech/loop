@@ -14,14 +14,15 @@ import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import { selectClasses } from '@mui/joy/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function ToDoCreator() {
     const [error, setError] = useState('');
     const [open, setOpen] = useState(false);
     const [toDoData, setToDoData] = useState({
-        toDoTitle: '',
-        priority: '',
-        notes: '',
+        todo_title: "",
+        task_priority: "",
+        notes: ""
     });
 
     const handleInputChange = (fieldName, event) => {
@@ -41,8 +42,8 @@ function ToDoCreator() {
         const errors = {};
 
         // Check if all fields are filled
-        if (!toDoData.toDoTitle) errors.toDoTitle = 'Please enter a Task Title';
-        if (!toDoData.priority) errors.priority = 'Please select a Priority';
+        if (!toDoData.todo_title) errors.todo_title = 'Please enter a Task Title';
+        if (!toDoData.task_priority) errors.task_priority = 'Please select a Priority';
 
         if (Object.keys(errors).length > 0) {
             setError(errors);
@@ -52,17 +53,16 @@ function ToDoCreator() {
         // Clear any previous error
         setError('');
 
-        // axios.post('https://loop-i5gz.onrender.com/api/task/add', taskData)
-        //     .then((response) => {
-        //         console.log(JSON.stringify(response.data));
-        //         // Handle the response if needed
-        //     })
-        //     .catch((error) => {
-        //         console.error('Error adding task:', error);
-        //         // Handle API call error
-        //         // Set an error message
-        //         setError('Error adding task. Please try again.');
-        //     });
+        axios.post('https://loop-i5gz.onrender.com/api/todo/add', toDoData)
+            .then((response) => {
+                console.log(response.data.data[0]);
+            })
+            .catch((error) => {
+                console.error('Error adding task:', error);
+                console.error('Response data:', error.response.data);
+                console.error('Response status:', error.response.status);
+                setError('Error adding task. Please try again.');
+            });
 
         console.log(toDoData);
     };
@@ -116,11 +116,11 @@ function ToDoCreator() {
                 <FormControl >
                     <TextField
                         id='toDoTitle'
-                        className={`toDoInput ${error && !toDoData.toDoTitle ? 'error' : ''} `}
+                        className={`toDoInput ${error && !toDoData.todo_title ? 'error' : ''} `}
                         label="To Do Title"
                         name="toDoTitle"
-                        value={toDoData.toDoTitle}
-                        onChange={(e) => handleInputChange('toDoTitle', e)}
+                        value={toDoData.todo_title}
+                        onChange={(e) => handleInputChange('todo_title', e)}
                         style={{ borderRadius: '12px' }}
                         sx={{
                             width: '100%',
@@ -128,7 +128,7 @@ function ToDoCreator() {
                         }}
                     />
                 </FormControl>
-                {error.toDoTitle && <p className="errorText">{error.toDoTitle}</p>}
+                {error.todo_title && <p className="errorText">{error.todo_title}</p>}
             </div>
 
             {/* Priority */}
@@ -137,16 +137,16 @@ function ToDoCreator() {
                     <InputLabel
                         htmlFor="priority"
                         name="Priority"
-                        className={`inputLabel ${error && !toDoData.priority ? 'error' : ''}`}
+                        className={`inputLabel ${error && !toDoData.task_priority ? 'error' : ''}`}
                     >
                         Select priority
                     </InputLabel>
                     <Select
                         id='priority'
                         label="Priority"
-                        className={`toDoInput ${error && !toDoData.priority ? 'error' : ''}`}
-                        value={toDoData.priority}
-                        onChange={(e) => handleInputChange('priority', e)}
+                        className={`toDoInput ${error && !toDoData.task_priority ? 'error' : ''}`}
+                        value={toDoData.task_priority}
+                        onChange={(e) => handleInputChange('task_priority', e)}
                         indicator={<KeyboardArrowDown />}
                         sx={{
                             borderRadius: '12px',
@@ -166,7 +166,7 @@ function ToDoCreator() {
                         <MenuItem value="Low"><i class="fa-solid fa-flag greenFlag"></i>Low</MenuItem>
                     </Select>
                 </FormControl>
-                {error.priority && <p className="errorText">{error.priority}</p>}
+                {error.task_priority && <p className="errorText">{error.task_priority}</p>}
             </div>
 
 
@@ -181,7 +181,10 @@ function ToDoCreator() {
                 <Textarea 
                     sx={{ borderRadius: '12px', }}
                 placeholder={'Notes'}
-                minRows={6} />
+                minRows={6}
+                value={toDoData.notes}
+                    onChange={(e) => handleInputChange('notes', e)}  
+                />
             </FormControl>
 
             <button className="addToDo addTaskButtonCreator" onClick={handleAddToDo}>Add To Do</button>
