@@ -10,6 +10,12 @@ function Header() {
     const date = new Date();
     const optionsDayOfWeek = { weekday: 'long' };
     const optionsDayAndMonth = { day: 'numeric', month: 'long' };
+    const [selectedDate, setSelectedDate] = useState(dayjs(new Date()));
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date.$d);
+        console.log(selectedDate)
+    };
 
     const openCalendar = () => {
         setCalendarOpen(true);
@@ -19,8 +25,8 @@ function Header() {
         setCalendarOpen(false);
     };
 
-    const dayOfWeek = date.toLocaleDateString(undefined, optionsDayOfWeek);
-    const dayAndMonth = date.toLocaleDateString(undefined, optionsDayAndMonth);
+    const dayOfWeek = selectedDate.toLocaleDateString(undefined, optionsDayOfWeek);
+    const dayAndMonth = selectedDate.toLocaleDateString(undefined, optionsDayAndMonth);
 
     return (
         <div className="date">
@@ -37,6 +43,7 @@ function Header() {
                     <MobileDatePicker
                         defaultValue={dayjs(new Date())}
                         onClose={closeCalendar}
+                        onChange={handleDateChange}
                     />
                 )}
             </div>
