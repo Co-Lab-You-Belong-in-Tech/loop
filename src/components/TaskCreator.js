@@ -13,14 +13,14 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import Divider from '@mui/joy/Divider';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function TaskCreator() {
     const [open, setOpen] = useState(false);
     const [taskData, setTaskData] = useState({
         task_title: '',
-        description: "description",
+        description: null,
         estimated_time: '',
         category_color: '',
         category_type: '',
@@ -29,6 +29,7 @@ function TaskCreator() {
     });
 
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleInputChange = (fieldName, event) => {
         const value = event.target.value;
@@ -60,6 +61,7 @@ function TaskCreator() {
         axios.post('https://loop-i5gz.onrender.com/api/task/add', taskData)
             .then((response) => {
                 console.log(response.data.data[0]);
+                navigate('/home');
             })
             .catch((error) => {
                 console.error('Error adding task:', error);
@@ -67,8 +69,6 @@ function TaskCreator() {
                 console.error('Response status:', error.response.status);
                 setError('Error adding task. Please try again.');
             });
-
-        console.log(taskData);
     };
 
     const exitTaskCreator = () => {

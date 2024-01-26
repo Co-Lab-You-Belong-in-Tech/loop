@@ -23,13 +23,13 @@ const StyledBox = styled(Box)(({ theme }) => ({
 
 const StyledLink = styled(Link)(({ theme }) => ({
     display: 'block',
-    borderRadius: '8px', // Adjust the roundness
-    boxShadow: theme.palette.mode === 'light' ? '0px 5px 10px rgba(0, 0, 0, 0.1)' : '0px 5px 5px rgba(255, 255, 255, 0.1)', // Adjust shadow color and intensity
-    margin: '8px', // Add space on each side
-    padding: '16px', // Adjust the internal padding
+    borderRadius: '8px', 
+    boxShadow: theme.palette.mode === 'light' ? '0px 5px 10px rgba(0, 0, 0, 0.1)' : '0px 5px 5px rgba(255, 255, 255, 0.1)', 
+    margin: '8px',
+    padding: '16px',
     textDecoration: 'none',
     width: '100%',
-    color: 'inherit', // Inherit text color from parent
+    color: 'inherit', 
     '&:hover': {
         backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[800],
     },

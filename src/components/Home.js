@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link} from 'react-router-dom';
 import IconButton from '@mui/joy/IconButton';
 import Drawer from '@mui/joy/Drawer';
@@ -12,12 +12,39 @@ import TaskContainer from './TaskContainer';
 import BottomMenu from './BottomMenu';
 import AddTaskMenu from './AddTaskMenu';
 import AddHabitMenu from './AddHabitMenu';
+import axios from 'axios';
 
 function Home() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [bottomMenuOpen, setBottomMenuOpen] = useState(false);
     const [addTaskMenuOpen, setAddTaskMenuOpen] = useState(false);
     const [addHabitMenuOpen, setAddHabitMenuOpen] = useState(false);
+
+    const [apiData, setApiData] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            // Check if apiData is already populated
+            if (!apiData) {
+                try {
+                    let config = {
+                        method: 'get',
+                        maxBodyLength: Infinity,
+                        url: 'https://loop-i5gz.onrender.com/api/task',
+                        headers: {
+                        }
+                    };
+
+                    const response = await axios.request(config);
+                    setApiData(response.data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        };
+
+        fetchData();
+    }, [apiData]); 
 
     const handleMenuButtonClick = () => {
         setMenuOpen(!menuOpen);
@@ -94,7 +121,7 @@ function Home() {
 
             <Header />
 
-            <TaskContainer />
+            <TaskContainer apiData={apiData} setApiData={setApiData} />
 
             <IconButton 
             className='addButton' 
