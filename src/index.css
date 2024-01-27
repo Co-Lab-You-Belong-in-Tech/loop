@@ -644,7 +644,7 @@ li {
 .taskInfo {
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
     text-align: center;
     padding-bottom: 10px;
 }

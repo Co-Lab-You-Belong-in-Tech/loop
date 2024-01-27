@@ -173,7 +173,7 @@ function TaskCreator() {
                         <Divider />
                         <MenuItem value="45 minutes">45 minutes</MenuItem>
                         <Divider />
-                        <MenuItem value="1 hour">1 Hour</MenuItem>
+                        <MenuItem value="60 minutes">60 minutes</MenuItem>
                     </Select>
                 </FormControl>
                 {error.estimated_time && <p className="errorText">{error.estimated_time}</p>}
