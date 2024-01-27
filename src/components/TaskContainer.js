@@ -1,6 +1,10 @@
 import Task from './Task'
 import axios from 'axios';
-
+import AspectRatio from '@mui/joy/AspectRatio';
+import Box from '@mui/joy/Box';
+import FormControl from '@mui/joy/FormControl';
+import FormLabel from '@mui/joy/FormLabel';
+import Skeleton from '@mui/joy/Skeleton';
 
 function TaskContainer({apiData, setApiData}) {
     
@@ -29,16 +33,20 @@ function TaskContainer({apiData, setApiData}) {
         }
     };
 
+    const emptyStateP = <p>Add a task, event, or to-do item by tapping “+” down below</p>
+
     return (
         <div className="taskContainer">
-            <p>Add a task, event, or to-do item by tapping “+” down below</p>
-
-            {apiData && apiData.data && apiData.data.length > 0 && (
+            {apiData && apiData.data && apiData.data.length > 0 ? (
                 <ul>
                     {apiData.data.map(task => (
-                        <Task key={task.task_id} task={task} onDeleteTask={handleDeleteTask} />
+                        <li key={task.task_id}>
+                            <Task task={task} onDeleteTask={handleDeleteTask} />
+                        </li>
                     ))}
                 </ul>
+            ) : (
+                emptyStateP
             )}
         </div>
     );
