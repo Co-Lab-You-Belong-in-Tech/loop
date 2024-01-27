@@ -24,7 +24,6 @@ function Home() {
 
     useEffect(() => {
         const fetchData = async () => {
-            // Check if apiData is already populated
             if (!apiData) {
                 try {
                     let config = {

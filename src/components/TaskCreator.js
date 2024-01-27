@@ -55,7 +55,6 @@ function TaskCreator() {
             return;
         }
 
-        // Clear any previous error
         setError('');
 
         axios.post('https://loop-i5gz.onrender.com/api/task/add', taskData)

@@ -16,7 +16,6 @@ function Header() {
         const formattedDayOfWeek = selectedDate.format('dddd');
         const formattedDayAndMonth = selectedDate.format('MMMM D');
 
-        // Set the updated values in the state
         setDayOfWeek(formattedDayOfWeek);
         setDayAndMonth(formattedDayAndMonth);
     }, [selectedDate]);

@@ -38,7 +38,7 @@ function BottomMenu({ isOpen, onClose, onTasksLinkClick, onHabitLinkClick }) {
     const handleTasksLinkClick = () => {
         setTasksLinkClicked(true);
         onClose();
-        onTasksLinkClick();  // Call the function to open AddTaskMenu
+        onTasksLinkClick(); 
     };
 
     const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({

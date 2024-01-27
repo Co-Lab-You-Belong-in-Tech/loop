@@ -41,7 +41,6 @@ function ToDoCreator() {
     const handleAddToDo = () => {
         const errors = {};
 
-        // Check if all fields are filled
         if (!toDoData.todo_title) errors.todo_title = 'Please enter a Task Title';
         if (!toDoData.task_priority) errors.task_priority = 'Please select a Priority';
 
@@ -50,7 +49,6 @@ function ToDoCreator() {
             return;
         }
 
-        // Clear any previous error
         setError('');
 
         axios.post('https://loop-i5gz.onrender.com/api/todo/add', toDoData)
