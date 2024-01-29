@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import ListItemDecorator from '@mui/joy/ListItemDecorator';
 import MoreVert from '@mui/icons-material/MoreVert';
-import MenuButton from '@mui/joy/MenuButton';
 import Box from '@mui/joy/Box';
 import Drawer from '@mui/joy/Drawer';
-import Button from '@mui/joy/Button';
 import List from '@mui/joy/List';
 import Divider from '@mui/joy/Divider';
 import ListItem from '@mui/joy/ListItem';
@@ -12,18 +10,23 @@ import ListItemButton from '@mui/joy/ListItemButton';
 
 function Task({ task, onDeleteTask }) {
 
+    const [open, setOpen] = useState(false);
+    const [completed, setCompleted] = useState(false);
+
     const deleteTask = () => {
         console.log(task)
         onDeleteTask(task.task_id);
     }
-
-    const [open, setOpen] = useState(false);
 
     const toggleDrawer = (inOpen) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
         setOpen(inOpen);
+    };
+
+    const handleMarkAsComplete = () => {
+        setCompleted(!completed);
     };
 
 
@@ -45,7 +48,7 @@ function Task({ task, onDeleteTask }) {
     }
 
     return (
-        <div className="task">
+        <div className={`task ${completed ? 'completed' : ''}`}>
             <div className="taskTitleInfoDot">
                 <div className="categoryColor">
                     {getCircleByColor(task.category_color)}
@@ -76,7 +79,8 @@ function Task({ task, onDeleteTask }) {
             open={open} 
             onClose={toggleDrawer(false)}
             anchor="bottom"
-            size='sm'>
+            size='sm'
+            elevation= "10">
                 <Box
                     role="presentation"
                     onClick={toggleDrawer(false)}
@@ -84,16 +88,21 @@ function Task({ task, onDeleteTask }) {
                 >
                     <List>
                             <ListItem >
-                                <ListItemButton>Mark as complete</ListItemButton>
+                            <ListItemButton 
+                                onClick={handleMarkAsComplete}
+                            >Mark as complete</ListItemButton>
                             </ListItem>
+                            <Divider />
 
                             <ListItem>
                                 <ListItemButton>Edit</ListItemButton>
                             </ListItem>
+                            <Divider />
 
                             <ListItem>
                             <ListItemButton onClick={deleteTask}>Delete</ListItemButton>
                             </ListItem>
+                            <Divider />
 
                             <ListItem>
                             <ListItemButton onClick={toggleDrawer(false)}>Cancel</ListItemButton>

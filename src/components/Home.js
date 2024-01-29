@@ -21,29 +21,38 @@ function Home() {
     const [addHabitMenuOpen, setAddHabitMenuOpen] = useState(false);
 
     const [apiData, setApiData] = useState(null);
+    const [taskApiData, setTaskApiData] = useState(null);
+    const [todoApiData, setTodoApiData] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
-            if (!apiData) {
-                try {
-                    let config = {
-                        method: 'get',
-                        maxBodyLength: Infinity,
-                        url: 'https://loop-i5gz.onrender.com/api/task',
-                        headers: {
-                        }
-                    };
+            try {
+                // Fetch task data
+                const taskConfig = {
+                    method: 'get',
+                    maxBodyLength: Infinity,
+                    url: 'https://loop-i5gz.onrender.com/api/task',
+                    headers: {}
+                };
+                const taskResponse = await axios.request(taskConfig);
+                setTaskApiData(taskResponse.data);
 
-                    const response = await axios.request(config);
-                    setApiData(response.data);
-                } catch (error) {
-                    console.log(error);
-                }
+                // Fetch todo data
+                const todoConfig = {
+                    method: 'get',
+                    maxBodyLength: Infinity,
+                    url: 'https://loop-i5gz.onrender.com/api/todo',
+                    headers: {}
+                };
+                const todoResponse = await axios.request(todoConfig);
+                setTodoApiData(todoResponse.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
         };
 
         fetchData();
-    }, [apiData]); 
+    }, []);
 
     const handleMenuButtonClick = () => {
         setMenuOpen(!menuOpen);
@@ -120,7 +129,12 @@ function Home() {
 
             <Header />
 
-            <TaskContainer apiData={apiData} setApiData={setApiData} />
+            <TaskContainer 
+            taskApiData={taskApiData} 
+            setTaskApiData={setTaskApiData}
+            todoApiData={todoApiData}
+            setTodoApiData={setTodoApiData}
+            />
 
             <IconButton 
             className='addButton' 

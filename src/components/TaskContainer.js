@@ -1,7 +1,8 @@
 import Task from './Task'
+import ToDo from './ToDo';
 import axios from 'axios';
 
-function TaskContainer({apiData, setApiData}) {
+function TaskContainer({ taskApiData, setTaskApiData, setTodoApiData, todoApiData }) {
     
     const handleDeleteTask = async (taskId) => {
         try {
@@ -19,7 +20,7 @@ function TaskContainer({apiData, setApiData}) {
             const response = await axios.request(config);
             console.log(JSON.stringify(response.data));
 
-            setApiData(prevApiData => ({
+            setTaskApiData(prevApiData => ({
                 ...prevApiData,
                 data: prevApiData.data.filter(task => task.task_id !== taskId)
             }));
@@ -28,13 +29,34 @@ function TaskContainer({apiData, setApiData}) {
         }
     };
 
+    const handleDeleteToDo = async (todo_id) => {
+        try {
+            let data = '';
+            const config = {
+                method: 'delete',
+                maxBodyLength: Infinity,
+                url: `https://loop-i5gz.onrender.com/api/todo/${todo_id}`,
+                headers: {},
+                data: data
+            };
+
+            await axios.request(config);
+            setTodoApiData((prevApiData) => ({
+                ...prevApiData,
+                data: prevApiData.data.filter((todo) => todo.todo_id !== todo_id),
+            }));
+        } catch (error) {
+            console.error('Error deleting ToDo:', error);
+        }
+    };
+
     const emptyStateP = <p>Add a task, event, or to-do item by tapping “+” down below</p>
 
     return (
         <div className="taskContainer">
-            {apiData && apiData.data && apiData.data.length > 0 ? (
+            {taskApiData && taskApiData.data && taskApiData.data.length > 0 ? (
                 <ul>
-                    {apiData.data.map(task => (
+                    {taskApiData.data.map(task => (
                         <li key={task.task_id}>
                             <Task task={task} onDeleteTask={handleDeleteTask} />
                         </li>
@@ -42,6 +64,18 @@ function TaskContainer({apiData, setApiData}) {
                 </ul>
             ) : (
                 emptyStateP
+            )}
+
+            {todoApiData && todoApiData.data && todoApiData.data.length > 0 ? (
+                <ul>
+                    {todoApiData.data.map((todo) => (
+                        <li key={todo.toDoId}>
+                            <ToDo todo={todo} onDeleteToDo={handleDeleteToDo} />
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                null
             )}
         </div>
     );

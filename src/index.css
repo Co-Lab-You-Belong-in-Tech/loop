@@ -619,6 +619,12 @@ li {
     background-color: rgba(255, 255, 255, 1);
     box-shadow: 0px 4px 10px #00000040;
     border-radius: 12px;
+    transition: opacity 0.3s ease-in-out
+}
+
+.completed {
+    background-color: grey;
+    opacity: 0.6;
 }
 
 .categoryColor {
@@ -662,6 +668,31 @@ li {
 
 .fa-stopwatch {
     padding-right: 5px;
+}
+
+/* ******************ToDo.js************************** */
+.redFlag,
+.orangeFlag,
+.greenFlag {
+    display: inline;
+}
+
+.toDoContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 19px;
+}
+
+.priorityColor {
+    display: flex;
+    padding-bottom: 10px;
+}
+.priorityColor p {
+    margin: 0;
+}
+
+.notes p {
+    margin: 5px 0;
 }
 
 @media (max-width: 575px) {

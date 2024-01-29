@@ -13,7 +13,7 @@ import Divider from '@mui/joy/Divider';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import { selectClasses } from '@mui/joy/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function ToDoCreator() {
@@ -24,6 +24,8 @@ function ToDoCreator() {
         task_priority: "",
         notes: ""
     });
+
+    const navigate = useNavigate();
 
     const handleInputChange = (fieldName, event) => {
         const value = event.target.value;
@@ -53,13 +55,20 @@ function ToDoCreator() {
 
         axios.post('https://loop-i5gz.onrender.com/api/todo/add', toDoData)
             .then((response) => {
-                console.log(response.data.data[0]);
+                const newToDo = response.data.data[0];
+
+                setToDoData((prevApiData) => ({
+                    ...prevApiData,
+                    data: [...prevApiData.data, newToDo],
+                }));
+
+                navigate('/home');
             })
             .catch((error) => {
-                console.error('Error adding task:', error);
+                console.error('Error adding ToDo:', error);
                 console.error('Response data:', error.response.data);
                 console.error('Response status:', error.response.status);
-                setError('Error adding task. Please try again.');
+                setError('Error adding ToDo. Please try again.');
             });
 
         console.log(toDoData);
@@ -157,17 +166,15 @@ function ToDoCreator() {
                             },
                         }}
                     >
-                        <MenuItem value="High"><i class="fa-solid fa-flag redFlag"></i> High</MenuItem>
+                        <MenuItem value="High"><i className="fa-solid fa-flag redFlag"></i> High</MenuItem>
                         <Divider />
-                        <MenuItem value="Medium"><i class="fa-solid fa-flag orangeFlag"></i> Medium</MenuItem>
+                        <MenuItem value="Medium"><i className="fa-solid fa-flag orangeFlag"></i> Medium</MenuItem>
                         <Divider />
-                        <MenuItem value="Low"><i class="fa-solid fa-flag greenFlag"></i>Low</MenuItem>
+                        <MenuItem value="Low"><i className="fa-solid fa-flag greenFlag"></i>Low</MenuItem>
                     </Select>
                 </FormControl>
                 {error.task_priority && <p className="errorText">{error.task_priority}</p>}
             </div>
-
-
 
             {/* Text Area */}
             <FormControl>
